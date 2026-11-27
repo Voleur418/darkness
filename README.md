@@ -1,67 +1,68 @@
-# Brightness CC 2026
+# Darkness
 
-**Version 27.3.0.142 (Build 0x7F3A) "Twilight Dunes"**
-by **Voleur**
-Screen tone overlay addon for Windower 4 (FFXI).
+Screen tone overlay for Windower
 
-Switch the game screen between three tones with one hotkey:
+**Version 26.11.4** · by **Voleur**
 
-| Tone   | Effect                                 |
-|--------|----------------------------------------|
-| Normal | No change                              |
-| Dark   | Black see-through layer, darker screen |
-| Bright | White see-through layer, lighter screen |
+Darken or lighten your game screen with a single hotkey. Three levels of
+darkness for night play, plus one subtle brightness level.
 
-Default hotkey: **Alt+F12**. Each press cycles: Normal → Dark → Bright → Normal.
+| Tone   | Effect                                      |
+|--------|---------------------------------------------|
+| Normal | No change                                   |
+| Dark 1 | Light black layer                           |
+| Dark 2 | Medium black layer                          |
+| Dark 3 | Heavy black layer                           |
+| Bright | Light white layer, slightly lighter screen  |
+
+Default hotkey: **Alt+F12**. Each press cycles
+Normal → Dark 1 → Dark 2 → Dark 3 → Bright → Normal.
 
 ---
 
 ## Install
 
-1. Create the folder `Windower\addons\brightness\`.
-2. Put `brightness.lua` in it.
-3. In game: `//lua load brightness`
+1. Create the folder `Windower\addons\darkness\`.
+2. Put `darkness.lua` in it.
+3. In game: `//lua load darkness`
 4. To load it automatically, add this line to `Windower\scripts\init.txt`:
    ```
-   lua load brightness
+   lua load darkness
    ```
 
 ---
 
 ## Commands
 
-You can use `//bright` or `//brightness`.
+Use `//dark` or `//darkness`.
 
-| Command                 | What it does                                  |
-|-------------------------|-----------------------------------------------|
-| `//bright cycle`        | Next tone (same as the hotkey)                |
-| `//bright normal`       | Normal tone (no overlay)                      |
-| `//bright dark`         | Dark tone                                     |
-| `//bright bright`       | Bright tone                                   |
-| `//bright up`           | Stronger effect for the current tone (+10)    |
-| `//bright down`         | Weaker effect for the current tone (-10)      |
-| `//bright level <0-255>`| Set the strength of the current tone directly |
-| `//bright key <key>`    | Change the hotkey for this session only       |
-| `//bright status`       | Show version, tone, levels and hotkey         |
+| Command            | What it does                          |
+|--------------------|---------------------------------------|
+| `//dark cycle`     | Next tone (same as the hotkey)        |
+| `//dark normal`    | Normal screen, no overlay             |
+| `//dark <1-3>`     | Jump to a dark level                  |
+| `//dark bright`    | Bright tone                           |
+| `//dark key <key>` | Change the hotkey for this session    |
+| `//dark status`    | Show version, tone, levels and hotkey |
 
-Dark and Bright each remember their own strength. The current tone and both
-levels are saved in `addons\brightness\data\settings.xml`.
-
-Default levels: Bright 30, Dark 80. Suggested ranges: Bright 20–40, Dark 60–120.
+The current tone is saved in `addons\darkness\data\settings.xml`.
 
 ---
 
-## Changing the hotkey
+## Configuration
 
-Open `brightness.lua`. The **USER CONFIG** block is at the top of the file:
+Open `darkness.lua`. The **USER CONFIG** block is at the top:
 
 ```lua
-local HOTKEY = '!f12'
+local HOTKEY       = '!f12'
+local DARK_LEVELS  = { 40, 70, 100 }
+local BRIGHT_LEVEL = 20
 ```
 
-Change it, save, then reload with `//lua r brightness`.
+Levels go from 0 to 255 (0 = no effect). You can add or remove entries in
+`DARK_LEVELS`; the cycle adapts. Save, then reload with `//lua r darkness`.
 
-Key modifiers (Windower bind syntax):
+Hotkey modifiers (Windower bind syntax):
 
 | Symbol | Key   |
 |--------|-------|
@@ -71,21 +72,15 @@ Key modifiers (Windower bind syntax):
 
 Examples: `'f12'` = F12, `'^f11'` = Ctrl+F11, `'~!b'` = Shift+Alt+B.
 
-To try a key without editing the file, use `//bright key ^f11`. That lasts
-until the addon is reloaded.
-
 ---
 
 ## Notes
 
-- Windower 4 addons can't change the real gamma, so this addon draws a
-  see-through layer over the screen instead. Bright mode can look a little
-  hazy. For real brightening, use Windower's gamma setting. Dark mode does
-  something gamma can't.
-- The layer also covers the in-game menus and chat.
-- If the addon was loaded before version 27.3.0.142, delete
-  `addons\brightness\data\settings.xml` for a clean start.
+- Windower addons can't change the real gamma, so Darkness draws a
+  see-through layer over the screen. Bright can look a little hazy; keep
+  `BRIGHT_LEVEL` low.
+- The layer also covers menus and chat.
 
 ---
 
-*Brightness CC 2026, v27.3.0.142, Build 0x7F3A "Twilight Dunes" · by Voleur*
+*Darkness v26.11.4 · by Voleur*

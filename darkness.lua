@@ -1,6 +1,6 @@
 --[[
     ============================================================
-     Darkness 2026
+     Darkness
      Version 26.11.4  (format: YY.MM.release)
      Screen darkness overlay for FFXIERA (FFXI)
     ------------------------------------------------------------
